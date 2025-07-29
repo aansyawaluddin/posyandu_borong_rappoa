@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto Posyandu Borong Rappoa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, #0f4c3a 0%, #1a5d4a 50%, #2d7a5f 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #0f4c3a, #2d7a5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(45, 122, 95, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(45, 122, 95, 0.6);
+                transform: scale(1.05);
+            }
+        }
+        
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slide-in.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        .stagger-delay-5 { transition-delay: 0.5s; }
+        .stagger-delay-6 { transition-delay: 0.6s; }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0f4c3a 0%, #1a5d4a 25%, #2d7a5f 50%, #1a5d4a 75%, #0f4c3a 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 8s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .morphing-blob {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes morph {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+        }
+
+        .service-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.8s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: #f3f4f6;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photo-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e5e7eb, #f9fafb);
+            border: 2px dashed #d1d5db;
+        }
+
+        .activity-section {
+            margin-bottom: 4rem;
+        }
+
+        .activity-title {
+            background: linear-gradient(135deg, #0f4c3a, #2d7a5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2d7a5f, #0f4c3a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .service-icon:hover {
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 15px 30px rgba(45, 122, 95, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #374151;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f4c3a, #2d7a5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-heartbeat text-white text-lg"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold">Posyandu Borong Rappoa</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Profil
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="layanan.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Layanan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="informasi.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Informasi Layanan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="foto.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Foto Kegiatan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="kontak.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Kontak
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden glass-effect rounded-2xl m-4 p-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Profil</a>
+                    <a href="layanan.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Layanan</a>
+                    <a href="informasi.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Informasi Layanan</a>
+                    <a href="foto.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Foto Kegiatan</a>
+                    <a href="kontak.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white min-h-screen flex items-center relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-20 right-20 w-72 h-72 bg-green-400 rounded-full morphing-blob opacity-10"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-green-300 rounded-full morphing-blob opacity-5" style="animation-delay: -2s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="slide-in">
+                        <h1 class="text-5xl md:text-7xl font-black leading-tight">
+                            <span class="block text-white">Posyandu</span>
+                            <span class="block text-gradient">Borong Rappoa</span>
+                        </h1>
+                    </div>
+                    
+                    <div class="slide-in stagger-delay-1">
+                        <p class="text-xl md:text-2xl text-green-100 leading-relaxed">
+                            Pelayanan Kesehatan Terpadu untuk Keluarga Sehat dan Sejahtera
+                        </p>
+                    </div>
+                    
+                    <div class="slide-in stagger-delay-2">
+                        <div class="flex items-center space-x-3 text-green-200">
+                            <i class="fas fa-map-marker-alt text-2xl"></i>
+                            <span class="text-lg">Kelurahan Borong Rappoa, Kecamatan Kindang, Kabupaten Bulukumba</span>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-in stagger-delay-3">
+                        <div class="flex flex-wrap gap-4">
+                            <a href="informasi.html" class="bg-white text-green-800 px-8 py-4 rounded-full font-bold hover:bg-green-50 transition-all duration-300 transform hover:scale-105 pulse-glow">
+                                Pelajari Lebih Lanjut
+                            </a>
+                            <a href="kontak.html" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-green-800 transition-all duration-300 transform hover:scale-105">
+                                Hubungi Kami
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block relative">
+                    <div class="floating-animation">
+                        <div class="relative">
+                            <div class="w-80 h-80 bg-gradient-to-br from-green-400 to-green-600 rounded-3xl transform rotate-12 opacity-80"></div>
+                            <div class="absolute top-8 left-8 w-80 h-80 bg-white rounded-3xl flex items-center justify-center transform -rotate-6">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-image text-6xl text-green-600 mb-4"></i>
+                                    <h3 class="text-2xl font-bold text-green-800">Foto Kegiatan</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Dokumentasi Kegiatan -->
+    <section class="py-10 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-gradient mb-6">Dokumentasi Kegiatan</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Berbagai kegiatan pelayanan kesehatan yang telah kami lakukan untuk masyarakat
+                </p>
+            </div>
+
+            <!-- Kegiatan 1: MP-ASI dan ASI Eksklusif -->
+            <div class="activity-section fade-up">
+                <h3 class="activity-title">Pendampingan Pemberian MP-ASI dan ASI Eksklusif</h3>
+                <div class="photo-grid">
+                    <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/1.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/2.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/3.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/4.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/5.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/6.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kegiatan 2: Pemeriksaan Ibu Hamil, Bayi & Balita -->
+            <div class="activity-section fade-up">
+                <h3 class="activity-title">Pemeriksaan Ibu Hamil, Bayi & Balita</h3>
+                <div class="photo-grid">
+                    <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/7.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/8.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/9.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/10.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/11.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/12.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kegiatan 3: Imunisasi Rutin -->
+            <div class="activity-section fade-up">
+                <h3 class="activity-title">Pemantauan & Pemberian Imunisasi Rutin pada Bayi & Balita</h3>
+                <div class="photo-grid">
+                    <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/13.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/14.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/15.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/16.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/17.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/18.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kegiatan 4: Penyuluhan PMT -->
+            <div class="activity-section fade-up">
+                <h3 class="activity-title">Penyuluhan Pemberian PMT (Pemberian Makanan Tambahan)</h3>
+                <div class="photo-grid">
+                    <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/19.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/20.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/21.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/22.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/23.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                     <div class="photo-item card-hover">
+                        <div class="photo-placeholder">
+                            <img src="/images/24.jpg" alt="Sesi Edukasi ASI Eksklusif" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="text-xl font-bold">Posyandu Borong Rappoa</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Melayani masyarakat dengan semangat gotong royong untuk keluarga yang sehat dan sejahtera.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Menu Utama</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#profil" class="hover:text-green-400 transition duration-300">Profil Posyandu</a></li>
+                        <li><a href="#layanan" class="hover:text-green-400 transition duration-300">Layanan</a></li>
+                        <li><a href="#informasi" class="hover:text-green-400 transition duration-300">Informasi Kesehatan</a></li>
+                        <li><a href="#kontak" class="hover:text-green-400 transition duration-300">Kontak</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Hubungi Kami</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p><i class="fas fa-phone mr-2"></i> +62 853-4172-7858</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> Kelurahan Borong Rappoa</p>
+                        <p class="ml-6">Kecamatan Kindang</p>
+                        <p class="ml-6">Kabupaten Bulukumba</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2025 Posyandu Borong Rappoa. Dibuat dengan <i class="fas fa-heart text-red-400"></i> untuk masyarakat sehat.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu and Smooth Scrolling -->
+    <script>
+// Initialize animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            // Smooth scrolling
+            const allLinks = document.querySelectorAll('a[href^="#"]');
+            allLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Navbar background on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-gradient-custom', 'shadow-2xl');
+                    navbar.classList.remove('bg-transparent');
+                } else {
+                    navbar.classList.remove('bg-gradient-custom', 'shadow-2xl');
+                    navbar.classList.add('bg-transparent');
+                }
+            });
+
+            // Animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animations
+            const slideElements = document.querySelectorAll('.slide-in, .fade-up');
+            slideElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Number counter animation
+            const counters = document.querySelectorAll('.stats-number');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const increment = target / 50;
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            if (current < target) {
+                                current += increment;
+                                counter.textContent = Math.ceil(current);
+                                setTimeout(updateCounter, 40);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        
+                        updateCounter();
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // Initialize navbar as transparent
+            navbar.classList.add('bg-transparent');
+            
+            // Trigger initial animations for visible elements
+            setTimeout(() => {
+                const heroElements = document.querySelectorAll('.slide-in');
+                heroElements.forEach(element => {
+                    element.classList.add('active');
+                });
+            }, 100);
+
+            // Photo item click handlers for future modal functionality
+            const photoItems = document.querySelectorAll('.photo-item');
+            photoItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Future: Open modal with larger image
+                    console.log('Photo clicked - modal functionality can be added here');
+                });
+            });
+
+            // Schedule item hover effects
+            const scheduleItems = document.querySelectorAll('.schedule-item');
+            scheduleItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.backgroundColor = 'rgba(45, 122, 95, 0.1)';
+                });
+                item.addEventListener('mouseleave', () => {
+                    item.style.backgroundColor = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

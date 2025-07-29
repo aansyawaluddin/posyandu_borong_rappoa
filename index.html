@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Posyandu Borong Rappoa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, #0f4c3a 0%, #1a5d4a 50%, #2d7a5f 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #0f4c3a, #2d7a5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(45, 122, 95, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(45, 122, 95, 0.6);
+                transform: scale(1.05);
+            }
+        }
+        
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slide-in.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        .stagger-delay-5 { transition-delay: 0.5s; }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0f4c3a 0%, #1a5d4a 25%, #2d7a5f 50%, #1a5d4a 75%, #0f4c3a 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 8s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .number-counter {
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: #2d7a5f;
+        }
+        
+        .morphing-blob {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes morph {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-heartbeat text-white text-lg"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold">Posyandu Borong Rappoa</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Profil
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="layanan.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Layanan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="informasi.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Informasi Layanan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="foto.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Foto Kegiatan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="kontak.html" class="text-white hover:text-green-300 transition-all duration-300 relative group">
+                        Kontak
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden glass-effect rounded-2xl m-4 p-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Profil</a>
+                    <a href="layanan.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Layanan</a>
+                    <a href="informasi.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Informasi Layanan</a>
+                    <a href="foto.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Foto Kegiatan</a>
+                    <a href="kontak.html" class="block px-4 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-xl transition-all duration-300 mobile-menu-link">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white min-h-screen flex items-center relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-20 right-20 w-72 h-72 bg-green-400 rounded-full morphing-blob opacity-10"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-green-300 rounded-full morphing-blob opacity-5" style="animation-delay: -2s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="slide-in">
+                        <h1 class="text-5xl md:text-7xl font-black leading-tight">
+                            <span class="block text-white">Posyandu</span>
+                            <span class="block text-gradient">Borong Rappoa</span>
+                        </h1>
+                    </div>
+                    
+                    <div class="slide-in stagger-delay-1">
+                        <p class="text-xl md:text-2xl text-green-100 leading-relaxed">
+                            Pelayanan Kesehatan Terpadu untuk Keluarga Sehat dan Sejahtera
+                        </p>
+                    </div>
+                    
+                    <div class="slide-in stagger-delay-2">
+                        <div class="flex items-center space-x-3 text-green-200">
+                            <i class="fas fa-map-marker-alt text-2xl"></i>
+                            <span class="text-lg">Kelurahan Borong Rappoa, Kecamatan Kindang, Kabupaten Bulukumba</span>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-in stagger-delay-3">
+                        <div class="flex flex-wrap gap-4">
+                            <a href="index.html" class="bg-white text-green-800 px-8 py-4 rounded-full font-bold hover:bg-green-50 transition-all duration-300 transform hover:scale-105 pulse-glow">
+                                Pelajari Lebih Lanjut
+                            </a>
+                            <a href="kontak.html" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-green-800 transition-all duration-300 transform hover:scale-105">
+                                Hubungi Kami
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block relative">
+                    <div class="floating-animation">
+                        <div class="relative">
+                            <div class="w-80 h-80 bg-gradient-to-br from-green-400 to-green-600 rounded-3xl transform rotate-12 opacity-80"></div>
+                            <div class="absolute top-8 left-8 w-80 h-80 bg-white rounded-3xl flex items-center justify-center transform -rotate-6">
+                                <div class="text-center">
+                                    <i class="fas fa-users text-6xl text-green-600 mb-4"></i>
+                                    <h3 class="text-2xl font-bold text-green-800">5 Posyandu</h3>
+                                    <p class="text-green-600 font-semibold">Aktif Melayani</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center fade-up stagger-delay-1">
+                    <div class="number-counter" data-target="5">0</div>
+                    <p class="text-gray-600 font-semibold">Posyandu Aktif</p>
+                </div>
+                <div class="text-center fade-up stagger-delay-2">
+                    <div class="number-counter" data-target="25">0</div>
+                    <p class="text-gray-600 font-semibold">Kader Terlatih</p>
+                </div>
+                <div class="text-center fade-up stagger-delay-3">
+                    <div class="number-counter" data-target="500">0</div>
+                    <p class="text-gray-600 font-semibold">Keluarga Terlayani</p>
+                </div>
+                <div class="text-center fade-up stagger-delay-4">
+                    <div class="number-counter" data-target="15">0</div>
+                    <p class="text-gray-600 font-semibold">Tahun Pengalaman</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil Section -->
+    <section id="profil" class="py-20 bg-gradient-to-br from-gray-50 to-green-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-4xl md:text-5xl font-black text-gradient mb-6">Profil Posyandu</h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-green-500 to-green-600 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Sejarah -->
+            <div class="mb-20 fade-up stagger-delay-1">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-3xl p-8 text-white">
+                            <h3 class="text-3xl font-bold mb-6">Sejarah & Latar Belakang</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Posyandu (Pos Pelayanan Terpadu) merupakan salah satu wujud nyata peran serta masyarakat dalam pembangunan kesehatan yang berlandaskan pada semangat gotong royong dan kemandirian. Di seluruh Indonesia, Posyandu mulai tumbuh pada era 1980-an sebagai jawaban atas berbagai tantangan kesehatan masyarakat, khususnya dalam upaya menurunkan angka kematian ibu dan bayi, memperbaiki gizi balita, serta memberikan akses layanan kesehatan dasar yang lebih dekat dan terjangkau.
+                            </p>
+                            <p class="text-lg leading-relaxed">
+                               Di Kelurahan Borong Rappoa, Kecamatan Kindang, Kabupaten Bulukumba, semangat ini mulai tumbuh kuat seiring dengan meningkatnya kesadaran masyarakat terhadap pentingnya kesehatan ibu dan anak. Atas dorongan dari pemerintah, Puskesmas Borong Rappoa serta dukungan tokoh masyarakat dan kader PKK, maka dibentuklah lima Posyandu aktif yang tersebar di wilayah kelurahan ini
+                            </p>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-green-200 rounded-full opacity-50"></div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-calendar-alt text-green-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Era 1980-an</h4>
+                            </div>
+                            <p class="text-gray-600">Dimulainya gerakan Posyandu di seluruh Indonesia</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-seedling text-blue-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Perkembangan</h4>
+                            </div>
+                            <p class="text-gray-600">Tumbuhnya kesadaran masyarakat Borong Rappoa</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-trophy text-purple-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Saat Ini</h4>
+                            </div>
+                            <p class="text-gray-600">5 Posyandu aktif melayani masyarakat, yaitu:</p>
+                                <ul class="list-disc list-inside text-gray-600">
+                                <li>Posyandu Mangga 1</li>
+                                <li>Posyandu Mangga 2</li>
+                                <li>Posyandu Mangga 3</li>
+                                <li>Posyandu Mangga 4</li>
+                                <li>Posyandu Mangga 5</li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visi Misi -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-16">
+                <!-- Visi -->
+                <div class="fade-up stagger-delay-2">
+                    <div class="bg-white rounded-3xl p-8 shadow-2xl card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full opacity-10 transform translate-x-16 -translate-y-16"></div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4">
+                                <i class="fas fa-eye text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-3xl font-bold text-gray-800">Visi</h4>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            Mewujudkan keluarga sehat dan masyarakat yang mandiri melalui pelayanan kesehatan dasar yang merata, berkualitas, dan berkesinambungan.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Misi -->
+                <div class="fade-up stagger-delay-3">
+                    <div class="bg-white rounded-3xl p-8 shadow-2xl card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-400 to-green-500 rounded-full opacity-10 transform translate-x-16 -translate-y-16"></div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-4">
+                                <i class="fas fa-bullseye text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-3xl font-bold text-gray-800">Misi</h4>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start group">
+                                <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="text-white font-bold text-sm">1</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Memberikan pelayanan kesehatan dasar yang mudah dijangkau</p>
+                            </div>
+                            <div class="flex items-start group">
+                                <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="text-white font-bold text-sm">2</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Meningkatkan pengetahuan masyarakat tentang kesehatan</p>
+                            </div>
+                            <div class="flex items-start group">
+                                <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="text-white font-bold text-sm">3</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Mendorong peran aktif kader dan masyarakat</p>
+                            </div>
+                            <div class="flex items-start group">
+                                <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="text-white font-bold text-sm">4</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Mengembangkan kegiatan sesuai kebutuhan lokal</p>
+                            </div>
+                            <div class="flex items-start group">
+                                <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="text-white font-bold text-sm">5</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Menjalin kemitraan untuk keberlanjutan program</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Struktur Organisasi -->
+    <section id="struktur" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-4xl md:text-5xl font-black text-gradient mb-6">Struktur Organisasi</h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-green-500 to-green-600 mx-auto rounded-full"></div>
+                <p class="text-xl text-gray-600 mt-6">5 Posyandu Aktif Melayani Masyarakat</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Posyandu Cards -->
+                <div class="fade-up stagger-delay-1">
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-3xl p-6 shadow-xl card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-red-200 rounded-full opacity-30 transform translate-x-10 -translate-y-10"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Posyandu Mangga 1</h4>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-red-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Marni, S.Pd</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-red-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Murni, S.Pd</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-red-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Sasmita Sari</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-red-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Nurdiana</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-red-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Rismawati</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-up stagger-delay-2">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-6 shadow-xl card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-blue-200 rounded-full opacity-30 transform translate-x-10 -translate-y-10"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Posyandu Mangga 2</h4>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-blue-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Irdawati H</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-blue-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Sukmawati</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-blue-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Suharnaeni</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-blue-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Irdawati</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-blue-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Hasniar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-up stagger-delay-3">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-6 shadow-xl card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-green-200 rounded-full opacity-30 transform translate-x-10 -translate-y-10"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Posyandu Mangga 3</h4>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-green-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Masita</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-green-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Rismawati</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-green-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Hijrah</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-green-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Ani</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-green-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Najma</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-up stagger-delay-4">
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-6 shadow-xl card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-purple-200 rounded-full opacity-30 transform translate-x-10 -translate-y-10"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Posyandu Mangga 4</h4>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-purple-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Sulpiani</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-purple-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">A. Irnawati</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-purple-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Sania</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-purple-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Risnawato</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-purple-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Indriani</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-up stagger-delay-5 md:col-span-2 lg:col-span-1">
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-6 shadow-xl card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-orange-200 rounded-full opacity-30 transform translate-x-10 -translate-y-10"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Posyandu Mangga 5</h4>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-orange-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Sukmawati Rusdi</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-orange-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Sulfira</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-orange-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Irawati</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-orange-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Afriani Nur</span>
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i class="fas fa-user text-orange-500 mr-3"></i>
+                                    <span class="text-gray-700 font-medium">Hikmawati</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="fade-up stagger-delay-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-heartbeat text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold">Posyandu Borong Rappoa</span>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        Melayani masyarakat dengan semangat gotong royong untuk mewujudkan keluarga yang sehat dan sejahtera di Kelurahan Borong Rappoa.
+                    </p>
+                </div>
+                
+                <div class="fade-up stagger-delay-2">
+                    <h4 class="text-xl font-bold mb-6">Menu Utama</h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><a href="index.html" class="hover:text-green-400 transition-colors duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-sm"></i>Profil Posyandu</a></li>
+                        <li><a href="layanan.html" class="hover:text-green-400 transition-colors duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-sm"></i>Layanan</a></li>
+                        <li><a href="informasi.html" class="hover:text-green-400 transition-colors duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-sm"></i>Informasi Kesehatan</a></li>
+                        <li><a href="foto.html" class="hover:text-green-400 transition-colors duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-sm"></i>Foto Kegiatan</a></li>
+                        <li><a href="kontak.html" class="hover:text-green-400 transition-colors duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-sm"></i>Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="fade-up stagger-delay-3">
+                    <h4 class="text-xl font-bold mb-6">Informasi</h4>
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-green-400 mr-3"></i>
+                            <span>+62 853-4172-7858</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-green-400 mr-3 mt-1"></i>
+                            <div>
+                                <p>Kelurahan Borong Rappoa</p>
+                                <p>Kecamatan Kindang</p>
+                                <p>Kabupaten Bulukumba</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-green-400 mr-3"></i>
+                            <span>Minggu, 08:00 - 11:00 WIB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center fade-up">
+                <p class="text-gray-400">
+                    &copy; 2025 Posyandu Borong Rappoa. Dibuat dengan <i class="fas fa-heart text-red-500 mx-1"></i> untuk masyarakat sehat.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            // Smooth scrolling
+            const allLinks = document.querySelectorAll('a[href^="#"]');
+            allLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Navbar background on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-gradient-custom', 'shadow-2xl');
+                    navbar.classList.remove('bg-transparent');
+                } else {
+                    navbar.classList.remove('bg-gradient-custom', 'shadow-2xl');
+                    navbar.classList.add('bg-transparent');
+                }
+            });
+
+            // Animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animations
+            const slideElements = document.querySelectorAll('.slide-in, .fade-up');
+            slideElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Number counter animation
+            const counters = document.querySelectorAll('.number-counter');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const increment = target / 50;
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            if (current < target) {
+                                current += increment;
+                                counter.textContent = Math.ceil(current);
+                                setTimeout(updateCounter, 40);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        
+                        updateCounter();
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // Initialize navbar as transparent
+            navbar.classList.add('bg-transparent');
+            
+            // Trigger initial animations for visible elements
+            setTimeout(() => {
+                const heroElements = document.querySelectorAll('.slide-in');
+                heroElements.forEach(element => {
+                    element.classList.add('active');
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
